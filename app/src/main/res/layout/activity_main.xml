@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.greenmoon.undertheweather.core.Status"/>
+        <import type="com.greenmoon.undertheweather.core.Resource"/>
+        <variable
+            name="weather"
+            type="com.greenmoon.undertheweather.model.WeatherData"/>
+        <variable
+            name="weatherResource"
+            type="com.greenmoon.undertheweather.core.Resource"/>
+        <variable
+            name="weatherIcon"
+            type="com.greenmoon.undertheweather.model.WeatherData.Weather"/>
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="@string/app_name"
+            app:titleTextColor="@android:color/white"/>
+
+        <RelativeLayout
+            android:layout_below="@+id/toolbar"
+            app:show = "@{weather != null}"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/main_view"
+            android:padding="16dp"
+            android:layout_gravity="center_horizontal"
+            tools:context="com.greenmoon.undertheweather.MainActivity">
+
+            <TextView
+                android:id="@+id/date_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textAllCaps="true"
+                android:layout_centerHorizontal="true"
+                style="@style/Base.TextAppearance.AppCompat.Title"
+                />
+
+            <TextView
+                android:id="@+id/name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="true"
+                android:layout_below="@+id/date_tv"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                style="@style/Base.TextAppearance.AppCompat.Subhead"
+                android:text="@{weather.name}"
+                />
+
+            <RelativeLayout
+                android:id="@+id/weather_data"
+                android:layout_below="@+id/name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_centerHorizontal="true">
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="@dimen/weather_icon_size"
+                    android:layout_height="@dimen/weather_icon_size"
+                    app:icon="@{weatherIcon.icon}"
+                    android:layout_marginTop="16dp"
+                    android:contentDescription="@string/weather_icon"/>
+                <TextView
+                    android:id="@+id/max_temp_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/icon"
+                    android:layout_alignTop="@+id/icon"
+                    android:fontFamily="sans-serif-light"
+                    android:textSize="@dimen/max_temp_text_size"
+                    app:temperature="@{weather.main.maxTemperature}"
+                    style="@style/Base.TextAppearance.AppCompat.Subhead"/>
+                <TextView
+                    android:id="@+id/min_temp_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/max_temp_tv"
+                    android:layout_alignRight="@+id/max_temp_tv"
+                    android:fontFamily="sans-serif-light"
+                    style="@style/Base.TextAppearance.AppCompat.Subhead"
+                    app:temperature="@{weather.main.minTemperature}"
+                    android:textSize="@dimen/min_temp_text_size"/>
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            app:show="@{weatherResource.status == Status.LOADING}"
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            app:show="@{weatherResource.status == Status.ERROR}"
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/oops"
+                style="@style/Base.TextAppearance.AppCompat.Headline"/>
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{weatherResource.message ?? @string/unknown_error}"
+                style="@style/TextAppearance.AppCompat.Body1"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Under the Weather</string>
+    <string name="temperature">%1$s \u2103</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="location_not_enabled">Location is not enabled on your device.</string>
+    <string name="unknown_error">Failed to load weather data. Unknown error.</string>
+    <string name="no_play_services">You do not have Google Play Services installed on your device
+        .</string>
+    <string name="date">Today, %1$s</string>
+    <string name="weather_icon">Weather icon</string>
+    <string name="oops">Oops :(</string>
+</resources>

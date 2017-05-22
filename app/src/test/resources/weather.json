@@ -1,0 +1,25 @@
+{
+  "coord": {
+    "lon": -122.09,
+    "lat": 37.39
+  },
+  "sys": {
+    "type": 3,
+    "id": 168940,
+    "message":0,
+    "country": "ZA"
+  },
+  "weather": [
+    {
+      "id": 800,
+      "description": "Sky is clear",
+      "icon": "01n"
+    }
+  ],
+  "main": {
+    "temp": 16,
+    "temp_min": 9,
+    "temp_max": 25
+  },
+  "name": "Pretoria"
+}
